@@ -20,12 +20,16 @@ RSpec.describe V1::UsersController, type: :controller do
             end
             context "Respuesta con valores correctos de user" do
                 subject { payload_test } 
-                it { is_expected.to include(:id, :email, :age, :store) }
+                it { is_expected.to include(:id, :email, :age, :store, :token) }
             end 
             context "Respuesta con valores correctos store" do
                 subject { payload_test[:store] }
                 it { is_expected.to include(:id, :name, :created_at, :updated_at)}
-            end                  
+            end    
+            context "Respuesta con valores correctos token" do
+                subject { payload_test[:token] }
+                it { is_expected.to include(:id, :token, :expires_at)}
+            end                
         end      
         let(:bad_user) {{ email: "test", password: "123456", age: 10}}
         context 'Usuario incorrecto' do

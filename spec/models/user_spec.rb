@@ -47,5 +47,9 @@ RSpec.describe User, type: :model do
       should belong_to(:store)
     end
 
+    it 'Validar relacion con tokens' do
+      should have_many(:tokens)
+    end
+
   end
 end

@@ -4,6 +4,7 @@ module V1
             @user = Owner.new(user_params)
             if @user.valid?
                 @user.save 
+                @token = @user.tokens.create
                 render :show, status: :created
                 # render json: @user, status: :created
             else
@@ -14,6 +15,7 @@ module V1
         def login 
             @user = User.find_by(email: login_params[:email])
             if @user.present? && @user.authenticate(login_params[:password])
+                @token = @user.tokens.create
                 render :show 
             else
                 render( json: { error: I18n.t('user.bad_credentials') }, status: :bad_request)
