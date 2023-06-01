@@ -6,7 +6,7 @@ module V1
                 @user.save 
                 @token = @user.tokens.create
                 render :show, status: :created
-                # render json: @user, status: :created
+                render json: @user, status: :created
             else
                 render json: { errors: @user.errors.messages }, status: :bad_request
             end
